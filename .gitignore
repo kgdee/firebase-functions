@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+jspm_packages/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Build / Distribution outputs
+dist/
+build/
+lib/
+.next/
+.nuxt/
+.vuepress/dist/
+
+# Environment variables & sensitive info
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Testing & Coverage
+coverage/
+.nyc_output/
+
+# Editor & OS specific files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Netlify
+.netlify/

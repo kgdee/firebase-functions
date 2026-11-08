@@ -1,0 +1,271 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("/assets/fonts/Poppins-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --color-primary: #6366f1;
+  --color-primary-hover: #4f46e5;
+  --color-secondary: #10b981;
+
+  --color-bg: #f0f2f5;
+  --color-surface: #ffffff;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #ccc;
+  --color-overlay: rgba(0, 0, 0, 0.5);
+
+  --color-success: #4caf50;
+  --color-warning: #ff9800;
+  --color-danger: #ef5350;
+  --color-info: #03a9f4;
+
+  --color-red: #f44336;
+  --color-green: #4caf50;
+  --color-blue: #3f51b5;
+}
+
+.dark-theme {
+  --color-bg: #222;
+  --color-surface: #2c2c2c;
+  --color-text: #eee;
+  --color-text-muted: #aaa;
+  --color-border: #3c3c3c;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  border: none;
+  text-decoration: none;
+  line-height: 1.2;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+}
+
+.button {
+  gap: 5px;
+  padding: 8px 16px;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 1rem;
+}
+
+.btn-danger {
+  background-color: var(--color-danger);
+}
+
+.btn-icon {
+  background-color: transparent;
+  font-size: 1.1rem;
+}
+
+input,
+textarea {
+  font-family: "Poppins", sans-serif;
+  padding: 5px;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border-radius: 4px;
+  min-width: 0;
+}
+
+textarea {
+  resize: none;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.truncated {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@scope (.modal) {
+  :scope {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+  }
+
+  .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    max-width: calc(100% - 20px);
+    max-height: calc(100% - 100px);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 0;
+    background-color: transparent;
+    color: var(--color-text);
+    font-size: 1.2rem;
+  }
+
+  .modal-title {
+    flex-shrink: 0;
+    margin-right: 25px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .modal-body {
+    overflow-y: auto;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 5px;
+  }
+
+  .modal-actions > * {
+    flex: 1;
+  }
+}
+
+.title,
+.name {
+  flex-shrink: 0;
+  max-width: 90vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subtitle,
+.desc,
+.bio {
+  color: var(--color-text-muted);
+}
+
+.message {
+  color: var(--color-text-muted);
+}
+
+.link {
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+@scope (.toggle) {
+  :scope {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+  }
+
+  input {
+    display: none;
+  }
+
+  .slider {
+    position: absolute;
+    inset: 0;
+    background: #ccc;
+    border-radius: 26px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .slider::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 3px;
+    top: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+  }
+
+  input:checked + .slider {
+    background: #2196f3;
+  }
+
+  input:checked + .slider::before {
+    transform: translateX(24px);
+  }
+}
+
+.container {
+  position: relative;
+  max-width: 992px;
+  height: 100%;
+  margin: auto;
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 32px;
+  height: min-content;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
