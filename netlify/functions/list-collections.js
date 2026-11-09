@@ -1,6 +1,7 @@
-const { initializeApp, getApps, cert } = require("firebase-admin/app");
-const { getFirestore } = require("firebase-admin/firestore");
+import { initializeApp, getApps, cert } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 
+// Initialize Firebase Admin
 if (!getApps().length) {
   initializeApp({
     credential: cert({
@@ -13,40 +14,30 @@ if (!getApps().length) {
 
 const db = getFirestore();
 
-exports.handler = async (event) => {
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Content-Type": "application/json",
-  };
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Content-Type": "application/json",
+};
 
-  if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 200, headers, body: "" };
+export default async (req, context) => {
+  if (req.method === "OPTIONS") {
+    return new Response("", { status: 200, headers });
   }
 
   try {
-    const documentPath = event.queryStringParameters.path;
+    const url = new URL(req.url);
+    const documentPath = url.searchParams.get("path");
+
     if (!documentPath) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ error: "Missing document path" }),
-      };
+      return new Response(JSON.stringify({ error: "Missing document path" }), { status: 400, headers });
     }
 
     const docRef = db.doc(documentPath);
     const collections = await docRef.listCollections();
 
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({ collections: collections.map((col) => col.id) }),
-    };
+    return new Response(JSON.stringify({ collections: collections.map((col) => col.id) }), { status: 200, headers });
   } catch (err) {
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({ error: err.message }),
-    };
+    return new Response(JSON.stringify({ error: err.message }), { status: 500, headers });
   }
 };
