@@ -34,9 +34,14 @@ export default async (req, context) => {
     }
 
     const docRef = db.doc(documentPath);
-    const collections = await docRef.listCollections();
+    const collectionRefs = await docRef.listCollections();
+    const collections = collectionRefs.map((col) => ({
+      id: col.id,
+      path: col.path,
+      parentPath: col.parent.path,
+    }));
 
-    return new Response(JSON.stringify({ collections: collections.map((col) => col.id) }), { status: 200, headers });
+    return new Response(JSON.stringify({ collections: collections }), { status: 200, headers });
   } catch (err) {
     return new Response(JSON.stringify({ error: err.message }), { status: 500, headers });
   }
