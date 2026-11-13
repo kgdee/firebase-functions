@@ -18,7 +18,7 @@ const auth = getAuth();
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
+  "Access-Control-Allow-Methods": "DELETE, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
   "Content-Type": "application/json",
 };
